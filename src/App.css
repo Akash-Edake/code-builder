@@ -1,0 +1,16 @@
+.active{
+  color:tomato
+}
+.onhover:hover{
+  /* box-shadow: rgb(146, 193, 16,0.5) 0px 7px 29px 0px; */
+  box-shadow: rgb(145, 193, 16,0.8) 0px 5px 15px;
+}
+.onhover1:hover{
+  /* box-shadow: rgb(146, 193, 16,0.5) 0px 7px 29px 0px; */
+  box-shadow: cyan 0px 5px 15px;
+}
+@media (max-width:600px) {
+  .hide{
+    display: none !important;
+  }
+}

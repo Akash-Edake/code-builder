@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/styles/default.min.css"> -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.6.0/styles/a11y-dark.css">
+    <title>interViewCode</title>
+    <style>
+        * {
+            font-size: large;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body>
+
+    <pre><code>
+        var array =[0,1,1,0,1,1,0]
+        console.log("zero",array.filter(e=>e===0))
+        console.log("one",array.filter(e=>e===1))
+        let abc = {...array.filter(e=>e===0)}
+        console.log(abc)
+        </code></pre>
+    <pre>
+    <code>
+        function addNum(data){
+            const NuminString=''+data;
+          const stringinNUm = NuminString.split('').map((e)=>parseInt(e))
+            const final=stringinNUm.reduce((a,b)=>a+b)
+            if(final>9){
+              addNum(final)
+            }else{
+              console.log("final",final)
+            }
+          }
+          addNum(5421)
+    </code>
+</pre>
+
+    <pre>
+    <code>
+        const a = ["red", "yellow", "mango", "green"];
+        let newarray = [];
+        a.map((item) => {
+          let b = item.split("");
+          let c = b.reverse();
+          let d = c.join();
+          let e = d.replace(/,/g, "");
+          newarray.push(e);
+        });
+        console.log(newarray.reverse()); //[ 'neerg', 'ognam', 'wolley', 'der' ]
+    </code>
+</pre>
+
+    <pre>
+    <code>
+        let array = [1, 2, 3];
+
+        let res = array.map((item) => item * 2);
+        console.log("res2 By useing map", res);
+        console.log("array By useing map", array);
+        
+        let res2 = array.forEach((val) => val * 5);
+        console.log("res2 By useing forEach", res2);
+        console.log("array By usein forEach", array);
+        
+
+    </code>
+</pre>
+<pre>
+    <code>
+        let person = {
+            name: "akash",
+            tech: "react-dev",
+            details: function () {
+              console.log(`hi, im ${this.name} and work on ${this.tech}`);
+            }
+          };
+          person.details();
+          
+    </code>
+</pre>
+<pre>
+    <code>
+        
+import { useState } from "react";
+export default function App() {
+  const error = "ur age is less than 18";
+  const error1 = "ur age is more than 18";
+  const [text, settext] = useState("");
+  const [isError, setError] = useState(false);
+
+  const fun1 = (e) => {
+    console.log(e.target.value);
+    settext(e.target.value);
+    if (e.target.value < 18) {
+      setError(true);
+    }
+  };
+  return (
+    < div className="App">
+      < input value={text} onChange={fun1} />
+      {isError ? error : error1}
+    </ div>
+  );
+}
+       
+    </code>
+</pre>
+
+<pre>
+  <code>
+const a=['red','yellow','mango','green']
+let newarray=[]
+a.map((item)=>{
+let b=item.split('')
+let c= b.reverse()
+let d = c.join()
+let e= d.replace (/,/g, "")
+newarray.push(e)
+})
+console.log(newarray.reverse())//[ 'neerg', 'ognam', 'wolley', 'der' ]
+  </code>
+</pre>
+
+<iframe src="./findName.js" frameborder="0" width="100%" height="500px" ></iframe>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.6.0/build/highlight.min.js"></script>
+    <script>
+        hljs.initHighlightingOnLoad()   
+    </script>
+</body>
+
+</html>
