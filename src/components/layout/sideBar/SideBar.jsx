@@ -15,6 +15,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Switch from "@mui/material/Switch";
 import {
+  Avatar,
+  Button,
   FormControlLabel,
   ListItemButton,
   ListItemIcon,
@@ -26,10 +28,34 @@ import JavascriptIcon from "@mui/icons-material/Javascript";
 import CssIcon from "@mui/icons-material/Css";
 import Routing from "../../../routing/Routing";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
 export default function SideBar() {
+  const loginUser = JSON.parse(localStorage.getItem("userData")) || null;
   const [open, setOpen] = React.useState(false);
   const [mode, setMode] = React.useState(false);
+  const [profileImage, setProfileImage] = React.useState(loginUser?.profilePic);
+  React.useEffect(() => {
+    getTheme("").then((data) => setMode(data === "dark"));
+    getProfilePic(loginUser._id, "").then((data) => {
+      setProfileImage(data);
+      console.log("daaaaa",data)
+      loginUser.profilePic = data;
+      localStorage.setItem("userData", JSON.stringify(loginUser));
+    });
+  }, []);
+  const getTheme = async (themeValue) => {
+    const getThemeApi = await axios({
+      method: "post",
+      url: "https://code-builder-api.onrender.com/user/theme",
+      headers: {},
+      data: {
+        id: loginUser?._id,
+        theme: themeValue,
+      },
+    });
+    return getThemeApi.data.theme;
+  };
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -41,6 +67,94 @@ export default function SideBar() {
   const handelChangeMode = (e) => {
     const { checked } = e.target;
     setMode(checked);
+    getTheme(checked ? "dark" : "light");
+  };
+  const handelLogout = () => {
+    localStorage.clear();
+    location.reload();
+  };
+
+  const getProfilePic = async (id, picBase64) => {
+    const getProfilePicApi = await axios({
+      method: "post",
+      url: "https://code-builder-api.onrender.com/user/profilePic",
+      headers: {},
+      data: {
+        id: id,
+        profilePic: picBase64,
+      },
+    });
+    console.log("getProfilePicApi",getProfilePicApi)
+    return getProfilePicApi.data.profilePic;
+  };
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        // The result will be a base64 encoded image string
+        // const base64Image = reader.result;
+        // setProfileImage(base64Image);
+        resizeFile(reader.result, (resizedImage) => {
+          setProfileImage(resizedImage);
+          loginUser.profilePic = resizedImage;
+          localStorage.setItem("userData", JSON.stringify(loginUser));
+          getProfilePic(loginUser._id, resizedImage);
+          // You can upload the base64-encoded image using your API function here
+          // createImage(resizedImage);
+        });
+      };
+
+      // Read the image file as a data URL
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const resizeFile = (base64, callback) => {
+    const MAX_FILE_SIZE_BYTES = 50000; // 50KB
+
+    const img = new Image();
+    img.src = base64;
+
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      const MAX_WIDTH = 800;
+      const MAX_HEIGHT = 800;
+
+      let width = img.width;
+      let height = img.height;
+
+      if (width > height) {
+        if (width > MAX_WIDTH) {
+          height *= MAX_WIDTH / width;
+          width = MAX_WIDTH;
+        }
+      } else {
+        if (height > MAX_HEIGHT) {
+          width *= MAX_HEIGHT / height;
+          height = MAX_HEIGHT;
+        }
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+
+      ctx.drawImage(img, 0, 0, width, height);
+
+      const resizedBase64 = canvas.toDataURL("image/jpeg"); // Adjust format as needed
+
+      if (resizedBase64.length <= MAX_FILE_SIZE_BYTES) {
+        callback(resizedBase64);
+      } else {
+        console.error("Image size exceeds 50KB");
+        alert("Image size exceeds 50KB");
+        // Handle error or inform the user
+      }
+    };
   };
   return (
     <ThemeProvider theme={darkTheme}>
@@ -87,6 +201,16 @@ export default function SideBar() {
               />
               {/* </Badge> */}
             </IconButton>
+            <label for="file-upload">
+              <Avatar alt="" src={profileImage} />
+            </label>
+            <input
+              style={{ display: "none" }}
+              type="file"
+              name="upload profile pic"
+              id="file-upload"
+              onChange={handleImageChange}
+            />
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" className={!open ? "hide" : ""} open={open}>
@@ -97,6 +221,7 @@ export default function SideBar() {
               justifyContent: "flex-end",
               px: [1],
             }}
+            className="mob-view"
           >
             <IconButton onClick={toggleDrawer}>
               <ChevronLeftIcon />
@@ -186,7 +311,14 @@ export default function SideBar() {
                 <ListItemText primary="CSS" />
               </ListItemButton>
             </NavLink>
-
+            <Button onClick={handelLogout}>
+              <ListItemButton>
+                <ListItemIcon>
+                  <CssIcon />
+                </ListItemIcon>
+                <ListItemText primary="logOut" />
+              </ListItemButton>
+            </Button>
             <Divider sx={{ my: 1 }} />
             {/* {secondaryListItems} */}
           </List>
@@ -201,11 +333,11 @@ export default function SideBar() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container>
-              <Routing />
-            </Grid>
-          </Container>
+          {/* <Container sx={{ mt: 4, mb: 4,ml:0,mr:0 }}> */}
+          <Grid sx={{ m: 2 }}>
+            <Routing />
+          </Grid>
+          {/* </Container> */}
         </Box>
       </Box>
     </ThemeProvider>
