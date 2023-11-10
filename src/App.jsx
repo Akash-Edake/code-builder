@@ -27,7 +27,7 @@ function App() {
     try {
       const user = await axios({
         method: "post",
-        url: "https://code-builder-api.onrender.com/user/login",
+        url: import.meta.env.VITE_BASE_URL+"/user/login",
         headers: {},
         data: {
           email: userEmail,
@@ -52,7 +52,7 @@ function App() {
     try {
       const user = await axios({
         method: "post",
-        url: "https://code-builder-api.onrender.com/user/singup",
+        url: import.meta.env.VITE_BASE_URL+"/user/singup",
         headers: {},
         data: {
           name: userName,

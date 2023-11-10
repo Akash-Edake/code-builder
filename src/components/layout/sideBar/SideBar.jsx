@@ -47,7 +47,7 @@ export default function SideBar() {
   const getTheme = async (themeValue) => {
     const getThemeApi = await axios({
       method: "post",
-      url: "https://code-builder-api.onrender.com/user/theme",
+      url: import.meta.env.VITE_BASE_URL+"/user/theme",
       headers: {},
       data: {
         id: loginUser?._id,
@@ -77,7 +77,7 @@ export default function SideBar() {
   const getProfilePic = async (id, picBase64) => {
     const getProfilePicApi = await axios({
       method: "post",
-      url: "https://code-builder-api.onrender.com/user/profilePic",
+      url: import.meta.env.VITE_BASE_URL+"/user/profilePic",
       headers: {},
       data: {
         id: id,
