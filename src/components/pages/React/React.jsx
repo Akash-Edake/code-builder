@@ -199,7 +199,6 @@ for (let i = 0; i < split.length; i++) {
   return (
     <>
       <CustBreadcrumb pageName="React" />
-      <div>hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii</div>
       <Grid container spacing={1}>
         <CardButton title="videos" onClick={setShow} />
         <CardButton title="documents" onClick={setShow} />
