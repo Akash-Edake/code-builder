@@ -66,7 +66,6 @@ function App() {
         },
       });
       setButtonDisable(false);
-      console.log(user);
     } catch (error) {
       alert("somthing went wrong");
       setButtonDisable(false);

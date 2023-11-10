@@ -39,7 +39,6 @@ export default function SideBar() {
     getTheme("").then((data) => setMode(data === "dark"));
     getProfilePic(loginUser._id, "").then((data) => {
       setProfileImage(data);
-      console.log("daaaaa",data)
       loginUser.profilePic = data;
       localStorage.setItem("userData", JSON.stringify(loginUser));
     });
@@ -84,7 +83,6 @@ export default function SideBar() {
         profilePic: picBase64,
       },
     });
-    console.log("getProfilePicApi",getProfilePicApi)
     return getProfilePicApi.data.profilePic;
   };
   const handleImageChange = (e) => {

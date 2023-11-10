@@ -50,7 +50,6 @@ import {
 function React() {
   const [show, setShow] = useState("videos");
   const [codeTheme, setCodeTheme] = useState("dracula");
-  console.log("codeTheme",codeTheme)
 
   let codetheme = [
     "a11yDark",
