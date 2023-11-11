@@ -197,13 +197,12 @@ for (let i = 0; i < split.length; i++) {
   };
   return (
     <>
-    hiiiiiiiiiiiiiiii
       <CustBreadcrumb pageName="React" />
       <Grid container spacing={1}>
         <CardButton title="videos" onClick={setShow} />
         <CardButton title="documents" onClick={setShow} />
 
-        <Grid  xs={12} md={12} sm={6}>
+        <Grid xs={12} md={12} sm={6}>
           {show == "videos" ? (
             <Typography variant="h5">videos</Typography>
           ) : (
@@ -211,7 +210,7 @@ for (let i = 0; i < split.length; i++) {
           )}
           {/* <VideoCard />
           <DocCard /> */}
-           {/* <Autocomplete
+          {/* <Autocomplete
         {...defaultProps}
         id="disable-close-on-select"
         disableCloseOnSelect
@@ -223,23 +222,22 @@ for (let i = 0; i < split.length; i++) {
         )}
       />
       <br/> */}
-          
         </Grid>
         {demoCode.map((codesnip) => {
-            return (
-              <Grid item xs={6}  >
-                <CopyBlock
-                  text={codesnip}
-                  language={"jsx"}
-                  showLineNumbers={true}
-                  theme={dracula}
-                  wrapLines={false}
-                  codeBlock
-                />
-                <br />
-              </Grid>
-            );
-          })}
+          return (
+            <Grid item xs={6}>
+              <CopyBlock
+                text={codesnip}
+                language={"jsx"}
+                showLineNumbers={true}
+                theme={dracula}
+                wrapLines={false}
+                codeBlock
+              />
+              <br />
+            </Grid>
+          );
+        })}
       </Grid>
     </>
   );
