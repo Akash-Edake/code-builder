@@ -18,16 +18,16 @@ function App() {
   const [show, setShow] = useState(false);
   const [date, setDate] = useState("");
   const [buttonDisable, setButtonDisable] = useState(false);
-  useEffect(()=>{
-    if(loginUser?.email.length>1){
-      setShow(true)
+  useEffect(() => {
+    if (loginUser?.email.length > 1) {
+      setShow(true);
     }
-  },[])
+  }, []);
   const userLogin = async (userEmail, userPassword) => {
     try {
       const user = await axios({
         method: "post",
-        url: import.meta.env.VITE_BASE_URL+"/user/login",
+        url: import.meta.env.VITE_BASE_URL + "/user/login",
         headers: {},
         data: {
           email: userEmail,
@@ -36,7 +36,7 @@ function App() {
       });
       setShow(true);
       setButtonDisable(false);
-      localStorage.setItem('userData', JSON.stringify(user.data))
+      localStorage.setItem("userData", JSON.stringify(user.data));
     } catch (error) {
       setButtonDisable(false);
       alert("user not found");
@@ -52,7 +52,7 @@ function App() {
     try {
       const user = await axios({
         method: "post",
-        url: import.meta.env.VITE_BASE_URL+"/user/singup",
+        url: import.meta.env.VITE_BASE_URL + "/user/singup",
         headers: {},
         data: {
           name: userName,
@@ -96,14 +96,12 @@ function App() {
           onSubmit={handleSubmit}
         >
           <TextField
-            id="standard-basic"
             label="email"
             variant="standard"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
           <TextField
-            id="standard-basic"
             label="password"
             variant="standard"
             value={password}
@@ -118,7 +116,7 @@ function App() {
               please wait....
             </Typography>
           )}
-          
+
           <Typography
             variant="subtitle1"
             gutterBottom
@@ -135,14 +133,12 @@ function App() {
           onSubmit={handleNewUser}
         >
           <TextField
-            id="standard-basic"
             label="name"
             variant="standard"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <TextField
-            id="standard-basic"
             label="email"
             variant="standard"
             value={email}
@@ -160,13 +156,12 @@ function App() {
             </DemoContainer>
           </LocalizationProvider>
           <TextField
-            id="standard-basic"
             label="password"
             variant="standard"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          
+
           {!buttonDisable ? (
             <Button type="submit" variant="outlined">
               sing Up
@@ -176,7 +171,7 @@ function App() {
               please wait...
             </Typography>
           )}
-          
+
           <Typography
             variant="subtitle1"
             gutterBottom
