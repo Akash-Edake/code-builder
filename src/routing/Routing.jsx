@@ -22,7 +22,7 @@ function Routing() {
           <Route path="/css" element={<Css />} />
         </Routes>
       </Suspense>
-      <Analytics debug={false} />
+      <Analytics />
     </>
   );
 }
