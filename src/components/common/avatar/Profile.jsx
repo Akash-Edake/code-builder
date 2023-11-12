@@ -1,14 +1,14 @@
 import { Avatar } from "@mui/material";
-import axios from "axios";
 import React, { useEffect } from "react";
 import Resizer from "react-image-file-resizer";
+import { profilePicApi } from "../../../api/api";
 
 function Profile() {
   const loginUser = JSON.parse(localStorage.getItem("userData")) || null;
   const [profileImage, setProfileImage] = React.useState(loginUser?.profilePic);
 
   useEffect(() => {
-    getProfilePic(loginUser._id, "").then((data) => {
+    profilePicApi(loginUser._id, "").then((data) => {
       setProfileImage(data);
       loginUser.profilePic = data;
       localStorage.setItem("userData", JSON.stringify(loginUser));
@@ -29,7 +29,7 @@ function Profile() {
           setProfileImage(resizedImage);
           loginUser.profilePic = resizedImage;
           localStorage.setItem("userData", JSON.stringify(loginUser));
-          getProfilePic(loginUser._id, resizedImage);
+          profilePicApi(loginUser._id, resizedImage);
           // You can upload the base64-encoded image using your API function here
           // createImage(resizedImage);
         });
@@ -95,18 +95,6 @@ function Profile() {
         // Handle error or inform the user
       }
     };
-  };
-  const getProfilePic = async (id, picBase64) => {
-    const getProfilePicApi = await axios({
-      method: "post",
-      url: import.meta.env.VITE_BASE_URL + "/user/profilePic",
-      headers: {},
-      data: {
-        id: id,
-        profilePic: picBase64,
-      },
-    });
-    return getProfilePicApi.data.profilePic;
   };
 
   return (

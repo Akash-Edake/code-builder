@@ -1,10 +1,10 @@
 import { FormControlLabel } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
-import axios from "axios";
 import React from "react";
 import { useDispatch } from "react-redux";
 import { UserTheme } from "../../../../redux/action/counterSlice";
+import {ThemeApi} from "../../../../api/api"
 
 export default function SwitchMode() {
   const loginUser = JSON.parse(localStorage.getItem("userData")) || null;
@@ -14,29 +14,17 @@ export default function SwitchMode() {
   const [mode, setMode] = React.useState(false);
 
   React.useEffect(() => {
-    getTheme("").then((data) => {
+    ThemeApi(loginUser?._id,"").then((data) => {
       setMode(data === "dark");
       dispatch(UserTheme(data));
     });
   }, []);
 
-  const getTheme = async (themeValue) => {
-    const getThemeApi = await axios({
-      method: "post",
-      url: import.meta.env.VITE_BASE_URL + "/user/theme",
-      headers: {},
-      data: {
-        id: loginUser?._id,
-        theme: themeValue,
-      },
-    });
-    return getThemeApi.data.theme;
-  };
 
   const handelChangeMode = (e) => {
     const { checked } = e.target;
     setMode(checked);
-    getTheme(checked ? "dark" : "light");
+    ThemeApi(loginUser?._id,checked ? "dark" : "light");
     dispatch(UserTheme(checked ? "dark" : "light"));
   };
   return (

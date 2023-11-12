@@ -1,7 +1,7 @@
 import { Button, TextField, Typography } from "@mui/material";
-import axios from "axios";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { signInApi } from "../../../../api/api";
 
 function SignIn() {
   const [email, setEmail] = React.useState("");
@@ -16,18 +16,10 @@ function SignIn() {
   };
 
   const singIn = async (userEmail, userPassword) => {
-    setLoading(true)
+    setLoading(true);
     try {
-      const user = await axios({
-        method: "post",
-        url: import.meta.env.VITE_BASE_URL + "/user/login",
-        headers: {},
-        data: {
-          email: userEmail,
-          password: userPassword,
-        },
-      });
-      localStorage.setItem("userData", JSON.stringify(user.data));
+      const user = await signInApi(userEmail, userPassword);
+      localStorage.setItem("userData", JSON.stringify(user));
       navigate("/");
     } catch (error) {
       setLoading(false);
@@ -60,9 +52,7 @@ function SignIn() {
         </Typography>
       )}
 
-      <Link to="/signUp" >
-        Don't have an account? Sign Up
-      </Link>
+      <Link to="/signUp">Don't have an account? Sign Up</Link>
     </form>
   );
 }

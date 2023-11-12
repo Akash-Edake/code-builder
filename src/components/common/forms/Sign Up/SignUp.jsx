@@ -1,11 +1,11 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
 import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from 'dayjs';
+import { signUpApi } from "../../../../api/api";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -25,22 +25,8 @@ function SignUp() {
   const singUp = async (userName, userEmail, userPassword, userBirthDate) => {
     setLoading(true);
     try {
-      await axios({
-        method: "post",
-        url: import.meta.env.VITE_BASE_URL + "/user/singup",
-        headers: {},
-        data: {
-          name: userName,
-          birthDate: {
-            month: userBirthDate["$M"] + 1,
-            day: userBirthDate["$D"],
-            year: userBirthDate["$y"],
-          },
-          email: userEmail,
-          password: userPassword,
-        },
-      });
-      navigate("/signIn");
+      signUpApi(userName, userEmail, userPassword, userBirthDate)
+      navigate("/");
     } catch (error) {
       alert("somthing went wrong");
       setLoading(false);
