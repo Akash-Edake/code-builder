@@ -1,7 +1,9 @@
-.active {
-  color: tomato
+.active>:first-child {
+  background: tomato
 }
-
+a{
+  text-decoration: none;
+}
 .onhover:hover {
   /* box-shadow: rgb(146, 193, 16,0.5) 0px 7px 29px 0px; */
   box-shadow: rgb(145, 193, 16, 0.8) 0px 5px 15px;
@@ -25,9 +27,6 @@
     display: none !important;
   }
 
-  .mob-view {
-    position: absolute !important;
-  }
 }
 
 
@@ -36,7 +35,7 @@
 body {
   --sb-track-color: #232e3300;
   --sb-thumb-color: #6BAF8D;
-  --sb-size: 10px;
+  --sb-size: 5px;
 
   scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
 }

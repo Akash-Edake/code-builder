@@ -1,98 +1,10 @@
-import { Autocomplete, Grid, TextField, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useState } from "react";
 import CardButton from "../../common/Card/CardButton";
+import Snippets from "../../common/Code snippets/Snippets";
 import CustBreadcrumb from "../../common/CustBreadcrumb/CustBreadcrumb";
-import VideoCard from "../../common/VideoCard/VideoCard";
-import DocCard from "../../common/docCard/DocCard";
-import {
-  CopyBlock,
-  a11yDark,
-  a11yLight,
-  anOldHope,
-  androidstudio,
-  arta,
-  atomOneDark,
-  atomOneLight,
-  codepen,
-  dracula,
-  far,
-  github,
-  googlecode,
-  hopscotch,
-  hybrid,
-  irBlack,
-  monoBlue,
-  monokaiSublime,
-  monokai,
-  nord,
-  noctisViola,
-  obsidian,
-  ocean,
-  paraisoDark,
-  paraisoLight,
-  pojoaque,
-  purebasic,
-  railscast,
-  rainbow,
-  shadesOfPurple,
-  solarizedDark,
-  solarizedLight,
-  sunburst,
-  tomorrowNightBlue,
-  tomorrowNightBright,
-  tomorrowNightEighties,
-  tomorrowNight,
-  tomorrow,
-  vs2015,
-  xt256,
-  zenburn,
-} from "react-code-blocks";
 function React() {
-  const [show, setShow] = useState("videos");
-  const [codeTheme, setCodeTheme] = useState("dracula");
-
-  let codetheme = [
-    "a11yDark",
-    "a11yLight",
-    "anOldHope",
-    "androidstudio",
-    "arta",
-    "atomOneDark",
-    "atomOneLight",
-    "codepen",
-    "dracula",
-    "far",
-    "github",
-    "googlecode",
-    "hopscotch",
-    "hybrid",
-    "irBlack",
-    "monoBlue",
-    "monokaiSublime",
-    "monokai",
-    "nord",
-    "noctisViola",
-    "obsidian",
-    "ocean",
-    "paraisoDark",
-    "paraisoLight",
-    "pojoaque",
-    "purebasic",
-    "railscast",
-    "rainbow",
-    "shadesOfPurple",
-    "solarizedDark",
-    "solarizedLight",
-    "sunburst",
-    "tomorrowNightBlue",
-    "tomorrowNightBright",
-    "tomorrowNightEighties",
-    "tomorrowNight",
-    "tomorrow",
-    "vs2015",
-    "xt256",
-    "zenburn",
-  ];
+  const [show, setShow] = useState("code");
 
   const demoCode = [
     `var array =[0,1,1,0,1,1,0]
@@ -191,53 +103,20 @@ for (let i = 0; i < split.length; i++) {
   }
 }`,
   ];
-  const defaultProps = {
-    options: codetheme,
-    getOptionLabel: (option) => option,
-  };
   return (
     <>
       <CustBreadcrumb pageName="React" />
+
       <Grid container spacing={1}>
+        <CardButton title="code" onClick={setShow} />
         <CardButton title="videos" onClick={setShow} />
         <CardButton title="documents" onClick={setShow} />
-
         <Grid xs={12} md={12} sm={6}>
-          {show == "videos" ? (
-            <Typography variant="h5">videos</Typography>
-          ) : (
-            <Typography variant="h5">document</Typography>
-          )}
-          {/* <VideoCard />
-          <DocCard /> */}
-          {/* <Autocomplete
-        {...defaultProps}
-        id="disable-close-on-select"
-        disableCloseOnSelect
-        onInputChange={(event, newValue) => {
-          setCodeTheme(newValue);
-        }}
-        renderInput={(params) => (
-          <TextField {...params} label="disableCloseOnSelect" variant="standard" />
-        )}
-      />
-      <br/> */}
+          <br />
+          <Typography variant="h5">{show}</Typography>
         </Grid>
-        {demoCode.map((codesnip) => {
-          return (
-            <Grid item xs={6}>
-              <CopyBlock
-                text={codesnip}
-                language={"jsx"}
-                showLineNumbers={true}
-                theme={dracula}
-                wrapLines={false}
-                codeBlock
-              />
-              <br />
-            </Grid>
-          );
-        })}
+
+        <Snippets code={demoCode} />
       </Grid>
     </>
   );

@@ -7,15 +7,12 @@ function Html() {
   return (
     <>
       <CustBreadcrumb pageName="Html" />
-      <Grid container spacing={4}>
+      <Grid container spacing={1}>
         <CardButton title="videos" onClick={setShow} />
         <CardButton title="documents" onClick={setShow} />
-        <Grid item xs={6}>
-          {show == "videos" ? (
-            <Typography variant="h5">videos</Typography>
-          ) : (
-            <Typography variant="h5">document</Typography>
-          )}
+        <Grid xs={12} md={12} sm={6}>
+          <br />
+          <Typography variant="h5">{show}</Typography>
         </Grid>
       </Grid>
     </>
