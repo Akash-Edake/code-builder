@@ -4,7 +4,7 @@ import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 import { signUpApi } from "../../../../api/api";
 
 function SignUp() {
@@ -25,7 +25,7 @@ function SignUp() {
   const singUp = async (userName, userEmail, userPassword, userBirthDate) => {
     setLoading(true);
     try {
-      signUpApi(userName, userEmail, userPassword, userBirthDate)
+      await signUpApi(userName, userEmail, userPassword, userBirthDate);
       navigate("/");
     } catch (error) {
       alert("somthing went wrong");
@@ -34,8 +34,8 @@ function SignUp() {
   };
 
   return (
-    <div >
-      <form onSubmit={handleSubmit} className="form" >
+    <div>
+      <form onSubmit={handleSubmit} className="form">
         <TextField
           label="name"
           variant="standard"
@@ -50,13 +50,13 @@ function SignUp() {
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           {/* <DemoContainer components={["DatePicker"]}> */}
-            <DatePicker
-              label="Birth Date"
-              slotProps={{ textField: { variant: "standard" } }}
-              value={date}
-              format="MM-DD-YYYY"
-              onChange={(newValue) => setDate(newValue)}
-            />
+          <DatePicker
+            label="Birth Date"
+            slotProps={{ textField: { variant: "standard" } }}
+            value={date}
+            format="MM-DD-YYYY"
+            onChange={(newValue) => setDate(newValue)}
+          />
           {/* </DemoContainer> */}
         </LocalizationProvider>
         <TextField
