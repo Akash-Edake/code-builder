@@ -1,6 +1,5 @@
 import { Button, TextField, Typography } from "@mui/material";
 import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
-import { DemoContainer } from "@mui/x-date-pickers/internals/demo";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -49,7 +48,6 @@ function SignUp() {
           onChange={(e) => setEmail(e.target.value)}
         />
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-          {/* <DemoContainer components={["DatePicker"]}> */}
           <DatePicker
             label="Birth Date"
             slotProps={{ textField: { variant: "standard" } }}
@@ -57,7 +55,6 @@ function SignUp() {
             format="MM-DD-YYYY"
             onChange={(newValue) => setDate(newValue)}
           />
-          {/* </DemoContainer> */}
         </LocalizationProvider>
         <TextField
           label="password"
