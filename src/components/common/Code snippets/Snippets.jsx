@@ -1,4 +1,10 @@
-import { Card, CardActionArea, CardContent, Grid } from "@mui/material";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  Grid,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import {
   CopyBlock,
@@ -101,8 +107,16 @@ function Snippets({ code, theme }) {
                 }}
               >
                 <CardActionArea>
+                  <Typography
+                    gutterBottom
+                    variant="body1"
+                    sx={{ ml: 2, mt: 1 }}
+                    component="div"
+                  >
+                    {codesnip.title}
+                  </Typography>
                   <CopyBlock
-                    text={codesnip}
+                    text={codesnip.content}
                     language={"jsx"}
                     showLineNumbers={true}
                     theme={snippetTheme[theme || "dracula"]}
@@ -128,8 +142,16 @@ function Snippets({ code, theme }) {
                 }}
               >
                 <CardActionArea>
+                  <Typography
+                    gutterBottom
+                    variant="body1"
+                    sx={{ ml: 2, mt: 1 }}
+                    component="div"
+                  >
+                    {codesnip.title}
+                  </Typography>
                   <CopyBlock
-                    text={codesnip}
+                    text={codesnip.content}
                     language={"jsx"}
                     showLineNumbers={true}
                     theme={snippetTheme[theme || "dracula"]}

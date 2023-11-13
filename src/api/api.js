@@ -1,7 +1,9 @@
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { CodeStorage } from "../redux/action/counterSlice";
 
-// const BASE_URL = "https://code-builder-api.vercel.app";
-const BASE_URL = "https://code-builder-api.onrender.com";
+const BASE_URL = "https://code-builder-api.vercel.app";
+// const BASE_URL = "https://code-builder-api.onrender.com";
 
 const profilePicApi = async (id, picBase64) => {
   try {
@@ -99,4 +101,20 @@ const snippetsThemeApi = async (id, theme, codeTheme) => {
   }
 };
 
-export { profilePicApi, ThemeApi, signInApi, signUpApi, snippetsThemeApi };
+const codeApi = async (id, theme, codeTheme) => {
+  try {
+    const user = await axios({
+      method: "get",
+      url: `${BASE_URL}/code`,
+      headers: {},
+      data: {
+      },
+    });
+    return user.data;
+  } catch (error) {
+    console.log("Error in login");
+    throw error;
+  }
+};
+
+export { profilePicApi, ThemeApi, signInApi, signUpApi, snippetsThemeApi,codeApi };
