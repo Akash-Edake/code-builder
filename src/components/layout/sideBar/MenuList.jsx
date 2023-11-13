@@ -13,7 +13,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 function MenuList() {
   const navigate = useNavigate();
   const handelLogout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
     navigate("/");
   };
   return (

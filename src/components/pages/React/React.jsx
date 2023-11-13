@@ -1,16 +1,25 @@
 import { Autocomplete, Grid, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import CardButton from "../../common/Card/CardButton";
 import Snippets from "../../common/Code snippets/Snippets";
 import CustBreadcrumb from "../../common/CustBreadcrumb/CustBreadcrumb";
 import { useSelector } from "react-redux";
+import { snippetsThemeApi } from "../../../api/api";
 
 const options = ["Option 1", "Option 2"];
 function React() {
-  const { userTheme, snippetsTheme } = useSelector((state) => state.counter);
+  const loginUser = JSON.parse(sessionStorage.getItem("userData")) || null;
+
+  const { userTheme, snippetsTheme, userData } = useSelector(
+    (state) => state.counter
+  );
 
   const [show, setShow] = useState("code");
-  const [value, setValue] = useState(snippetsTheme[0]);
+  const [value, setValue] = useState("dracula");
+
+  useEffect(() => {
+    setValue(loginUser.snippetsTheme[userTheme]);
+  }, [userTheme]);
 
   const demoCode = [
     `var array =[0,1,1,0,1,1,0]
@@ -127,14 +136,25 @@ for (let i = 0; i < split.length; i++) {
         <CardButton title="code" onClick={setShow} />
         <CardButton title="videos" onClick={setShow} />
         <CardButton title="documents" onClick={setShow} />
-        <Grid xs={12} md={12} sm={6} sx={{mt:4,mb:1}} display={"flex"} alignItems={"end"} >
-
-          <Typography variant="h5" sx={{mr:5,ml:1}}>{show}</Typography>
-          {show === "code" && ( 
+        <Grid
+          xs={12}
+          md={12}
+          sm={6}
+          sx={{ mt: 4, mb: 1 }}
+          display={"flex"}
+          alignItems={"end"}
+        >
+          <Typography variant="h5" sx={{ mr: 5, ml: 1 }}>
+            {show}
+          </Typography>
+          {show === "code" && (
             <Autocomplete
               value={value}
               onChange={(event, newValue) => {
                 setValue(newValue);
+                loginUser.snippetsTheme[userTheme] = newValue;
+                sessionStorage.setItem("userData", JSON.stringify(loginUser));
+                snippetsThemeApi(loginUser?._id, userTheme, newValue);
               }}
               options={snippetsTheme}
               sx={{ width: 200 }}

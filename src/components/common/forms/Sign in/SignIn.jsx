@@ -2,8 +2,11 @@ import { Button, TextField, Typography } from "@mui/material";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInApi } from "../../../../api/api";
+import { useDispatch } from "react-redux";
+import { UserData } from "../../../../redux/action/counterSlice";
 
 function SignIn() {
+  const dispatch = useDispatch();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
@@ -12,6 +15,7 @@ function SignIn() {
     if (email === "" || password === "")
       return alert("fill email and password");
     singIn(email, password);
+
     e.preventDefault();
   };
 
@@ -19,7 +23,8 @@ function SignIn() {
     setLoading(true);
     try {
       const user = await signInApi(userEmail, userPassword);
-      localStorage.setItem("userData", JSON.stringify(user));
+      dispatch(UserData(user));
+      sessionStorage.setItem("userData", JSON.stringify(user.userLogin));
       navigate("/");
     } catch (error) {
       setLoading(false);

@@ -5,7 +5,7 @@ import SideBar from "./components/layout/sideBar/SideBar";
 import { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 function App() {
-  const loginUser = JSON.parse(localStorage.getItem("userData")) || null;
+  const loginUser = JSON.parse(sessionStorage.getItem("userData")) || null;
   const navigate = useNavigate();
   useEffect(() => {
     if (loginUser?.email.length < 1) {

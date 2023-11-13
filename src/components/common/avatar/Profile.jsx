@@ -4,14 +4,14 @@ import Resizer from "react-image-file-resizer";
 import { profilePicApi } from "../../../api/api";
 
 function Profile() {
-  const loginUser = JSON.parse(localStorage.getItem("userData")) || null;
+  const loginUser = JSON.parse(sessionStorage.getItem("userData")) || null;
   const [profileImage, setProfileImage] = React.useState(loginUser?.profilePic);
 
   useEffect(() => {
     profilePicApi(loginUser._id, "").then((data) => {
       setProfileImage(data);
       loginUser.profilePic = data;
-      localStorage.setItem("userData", JSON.stringify(loginUser));
+      sessionStorage.setItem("userData", JSON.stringify(loginUser));
     });
   }, []);
 
@@ -28,7 +28,7 @@ function Profile() {
         resizeFile(reader.result, file, (resizedImage) => {
           setProfileImage(resizedImage);
           loginUser.profilePic = resizedImage;
-          localStorage.setItem("userData", JSON.stringify(loginUser));
+          sessionStorage.setItem("userData", JSON.stringify(loginUser));
           profilePicApi(loginUser._id, resizedImage);
           // You can upload the base64-encoded image using your API function here
           // createImage(resizedImage);

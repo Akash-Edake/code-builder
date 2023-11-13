@@ -45,6 +45,7 @@ const initialState = {
     "xt256",
     "zenburn",
   ],
+  userData: {},
 };
 
 export const counterSlice = createSlice({
@@ -54,10 +55,13 @@ export const counterSlice = createSlice({
     UserTheme: (state, action) => {
       state.userTheme = action.payload;
     },
+    UserData: (state, action) => {
+      state.userData = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { UserTheme } = counterSlice.actions;
+export const { UserTheme, UserData } = counterSlice.actions;
 
 export default counterSlice.reducer;

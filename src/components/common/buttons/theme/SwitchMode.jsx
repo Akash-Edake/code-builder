@@ -7,7 +7,7 @@ import { UserTheme } from "../../../../redux/action/counterSlice";
 import {ThemeApi} from "../../../../api/api"
 
 export default function SwitchMode() {
-  const loginUser = JSON.parse(localStorage.getItem("userData")) || null;
+  const loginUser = JSON.parse(sessionStorage.getItem("userData")) || null;
 
   const dispatch = useDispatch();
 

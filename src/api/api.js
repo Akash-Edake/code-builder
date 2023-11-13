@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://code-builder-api.vercel.app";
+// const BASE_URL = "https://code-builder-api.vercel.app";
+const BASE_URL = "https://code-builder-api.onrender.com";
 
 const profilePicApi = async (id, picBase64) => {
   try {
@@ -79,4 +80,23 @@ const signUpApi = async (userName, userEmail, userPassword, userBirthDate) => {
   }
 };
 
-export { profilePicApi, ThemeApi, signInApi, signUpApi };
+const snippetsThemeApi = async (id, theme, codeTheme) => {
+  try {
+    const user = await axios({
+      method: "post",
+      url: `${BASE_URL}/user/snippetsTheme`,
+      headers: {},
+      data: {
+        id: id,
+        theme: theme,
+        snippetsTheme: codeTheme,
+      },
+    });
+    return user.data;
+  } catch (error) {
+    console.log("Error in login");
+    throw error;
+  }
+};
+
+export { profilePicApi, ThemeApi, signInApi, signUpApi, snippetsThemeApi };
