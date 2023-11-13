@@ -37,7 +37,7 @@ export default function SideBar() {
     <ThemeProvider theme={darkTheme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
-        <AppBar position="absolute" color="secondary" open={open}>
+        <AppBar position="absolute" color="inherit" open={open}>
           <Toolbar
             sx={{
               pr: "24px", // keep right padding when drawer closed
