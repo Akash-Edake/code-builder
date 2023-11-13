@@ -28,7 +28,6 @@ function App() {
         </>
       )}
 
-      {/* <input onChange={(e) => inputSearch(e)} /> */}
     </>
   );
 }

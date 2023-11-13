@@ -103,6 +103,12 @@ for (let i = 0; i < split.length; i++) {
   }
 }`,
   ];
+
+  const tab = {
+    code: <Snippets code={demoCode} />,
+    videos:"",
+    documents:""
+  }
   return (
     <>
       <CustBreadcrumb pageName="React" />
@@ -116,7 +122,7 @@ for (let i = 0; i < split.length; i++) {
           <Typography variant="h5">{show}</Typography>
         </Grid>
 
-        <Snippets code={demoCode} />
+        {tab[show]}
       </Grid>
     </>
   );
