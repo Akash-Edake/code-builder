@@ -10,8 +10,11 @@ import ListItemText from "@mui/material/ListItemText";
 import * as React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import Fade from "@mui/material/Fade";
+import { useSelector } from "react-redux";
 
-function MenuList({ onClick }) {
+function MenuList({ onClick, sideBarIsOpen }) {
+  const { userTheme } = useSelector((state) => state.counter);
+
   const navigate = useNavigate();
   const handelLogout = () => {
     sessionStorage.clear();
@@ -23,7 +26,7 @@ function MenuList({ onClick }) {
         return (
           <Tooltip
             key={list.title}
-            title={list.title}
+            title={sideBarIsOpen ? "" : list.title}
             arrow
             placement="right"
             TransitionComponent={Fade}
@@ -38,14 +41,17 @@ function MenuList({ onClick }) {
             >
               <ListItemButton className="onhover1">
                 <ListItemIcon>{list.icon}</ListItemIcon>
-                <ListItemText primary={list.title} />
+                <ListItemText
+                  primary={list.title}
+                  style={userTheme=="light"?{ color: "#212121" }:{ color: "#fff" }}
+                />
               </ListItemButton>
             </NavLink>
           </Tooltip>
         );
       })}
       <Tooltip
-        title="Log out"
+        title={sideBarIsOpen ? "" : "Log out"}
         arrow
         placement="right"
         TransitionComponent={Fade}
@@ -55,7 +61,7 @@ function MenuList({ onClick }) {
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
-          <ListItemText primary="Log out" style={{ color: "#0000EE" }} />
+          <ListItemText primary="Log out" />
         </ListItemButton>
       </Tooltip>
       <Divider sx={{ my: 1 }} />

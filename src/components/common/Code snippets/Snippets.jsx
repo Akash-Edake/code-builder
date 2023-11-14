@@ -10,7 +10,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   CopyBlock,
   a11yDark,
@@ -108,11 +108,17 @@ function Snippets({ fileType }) {
   );
   const dispatch = useDispatch();
 
+  const initialRef = useRef(true);
+
   const [theme, setTheme] = useState("dracula");
   const [code, setCode] = useState([]);
   const [isDataAvailable, setIsDataAvailable] = useState("");
 
   useEffect(() => {
+    if (!initialRef.current) {
+      return;
+    }
+    initialRef.current = false;
     if (codeStorage.length > 1) {
       const filterData = codeStorage.filter(
         (data) => data.fileType == fileType
@@ -129,7 +135,7 @@ function Snippets({ fileType }) {
         dispatch(CodeStorage(data));
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [codeStorage]);
 
   useEffect(() => {
     setTheme(loginUser.snippetsTheme[userTheme]);

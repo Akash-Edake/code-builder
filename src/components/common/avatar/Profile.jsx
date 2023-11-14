@@ -1,14 +1,21 @@
 import { Avatar } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import Resizer from "react-image-file-resizer";
 import { profilePicApi } from "../../../api/api";
 import { useState } from "react";
 
 function Profile() {
   const loginUser = JSON.parse(sessionStorage.getItem("userData")) || null;
+
+  const initialRef = useRef(true);
+
   const [profileImage, setProfileImage] =useState(loginUser?.profilePic);
 
   useEffect(() => {
+    if (!initialRef.current) {
+      return;
+    }
+    initialRef.current = false;
     profilePicApi(loginUser._id, "").then((data) => {
       setProfileImage(data);
       loginUser.profilePic = data;

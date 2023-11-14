@@ -1,7 +1,7 @@
 import { FormControlLabel } from "@mui/material";
 import Switch from "@mui/material/Switch";
 import { styled } from "@mui/material/styles";
-import React from "react";
+import React, { useRef } from "react";
 import { useDispatch } from "react-redux";
 import { UserTheme } from "../../../../redux/action/counterSlice";
 import { ThemeApi } from "../../../../api/api";
@@ -9,11 +9,18 @@ import { ThemeApi } from "../../../../api/api";
 export default function SwitchMode() {
   const loginUser = JSON.parse(sessionStorage.getItem("userData")) || null;
 
+  const initialRef = useRef(true);
+
   const dispatch = useDispatch();
 
   const [mode, setMode] = React.useState(false);
 
   React.useEffect(() => {
+    if (!initialRef.current) {
+      return;
+    }
+    initialRef.current = false;
+
     ThemeApi(loginUser?._id, "").then((data) => {
       setMode(data === "dark");
       dispatch(UserTheme(data));

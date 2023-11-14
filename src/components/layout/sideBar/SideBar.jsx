@@ -86,7 +86,7 @@ export default function SideBar() {
           <Divider />
 
           <List component="nav" style={{ position: "none" }}>
-            <MenuList onClick={toggleDrawer} />
+            <MenuList onClick={toggleDrawer} sideBarIsOpen={open} />
           </List>
         </Drawer>
         <Box

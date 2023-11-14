@@ -11,7 +11,8 @@ a{
 
 .onhover1:hover {
   /* box-shadow: rgb(146, 193, 16,0.5) 0px 7px 29px 0px; */
-  box-shadow: cyan 0px 5px 15px;
+  /* box-shadow: rgba(255, 255, 0, 0.3) 0px 0px 3px 3px; */
+  box-shadow: rgba(255, 99, 71, 0.2) 0px 0px 3px 3px;
 }
 
 .form {
