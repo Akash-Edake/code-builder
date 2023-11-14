@@ -1,30 +1,37 @@
-import { Button, Card, CardActionArea, CardActions, CardContent, Typography } from "@mui/material";
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import DownloadIcon from '@mui/icons-material/Download';
-import FileCopyRoundedIcon from '@mui/icons-material/FileCopyRounded';
+import { Grid, Typography } from "@mui/material";
 function DocCard() {
-    return ( 
-        <Card   variant="outlined"
-        sx={{
-          boxShadow: 2,
-          borderRadius: 2,
-          minWidth: 75,
-          maxWidth: 150,
-        }}
-        className="onhover1">
-            <CardActionArea>
-        <CardContent>
-          <Typography variant="h5" component="div" textAlign={'center'}>
-            <FileCopyRoundedIcon  fontSize="large"/>
-          </Typography>
-        </CardContent>
-        <CardActions  >
-        <a href="../../../assets/react/js&react.pdf" target="_self" ><Button size="small"><VisibilityIcon/> </Button> </a>
-          <Button size="small"><DownloadIcon/> </Button>
-        </CardActions>
-        </CardActionArea>
-      </Card>
-     );
+  return (
+    <>
+      <Grid
+        xs={12}
+        md={12}
+        sm={12}
+        sx={{ mt: 1, mb: 1 }}
+        display={"flex"}
+        justifyContent={"space-between"}
+        flexWrap={"wrap"}
+        alignItems={"end"}
+      >
+        <Typography variant="h5" sx={{ ml: 1 }}>
+          Documents
+        </Typography>
+        {/* <Autocomplete
+          value={theme}
+          onChange={(event, newValue) => {
+            setTheme(newValue);
+            loginUser.snippetsTheme[userTheme] = newValue;
+            sessionStorage.setItem("userData", JSON.stringify(loginUser));
+            snippetsThemeApi(loginUser?._id, userTheme, newValue);
+          }}
+          options={snippetsTheme}
+          sx={{ width: 200, mr: 1 }}
+          renderInput={(params) => (
+            <TextField {...params} label="snippets theme" variant="standard" />
+          )}
+        /> */}
+      </Grid>
+    </>
+  );
 }
 
 export default DocCard;
