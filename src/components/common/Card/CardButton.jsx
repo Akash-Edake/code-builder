@@ -42,7 +42,7 @@ function CardButton({ titles, componentType }) {
     <>
       {titles?.map((title) => {
         return (
-          <Grid item xs={6} sm={6} md={3} lg={1.5}>
+          <Grid key={title} item xs={6} sm={6} md={3} lg={1.8}>
             <Card
               onClick={() => handelClick(title)}
               variant="outlined"

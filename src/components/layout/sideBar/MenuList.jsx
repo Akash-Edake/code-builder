@@ -22,6 +22,7 @@ function MenuList({ onClick }) {
       {sideBarList.map((list) => {
         return (
           <Tooltip
+            key={list.title}
             title={list.title}
             arrow
             placement="right"

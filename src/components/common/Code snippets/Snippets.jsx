@@ -127,7 +127,6 @@ function Snippets({ fileType }) {
         setCode(filterData);
         setIsDataAvailable(filterData.length ? "" : "Data Not Found");
         dispatch(CodeStorage(data));
-        console.log(filterData);
       })
       .catch((error) => console.log(error));
   }, []);
