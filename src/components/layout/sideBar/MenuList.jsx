@@ -3,14 +3,15 @@ import HdrAutoIcon from "@mui/icons-material/HdrAuto";
 import HtmlIcon from "@mui/icons-material/Html";
 import JavascriptIcon from "@mui/icons-material/Javascript";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Divider } from "@mui/material";
+import { Divider, Tooltip } from "@mui/material";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import * as React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import Fade from "@mui/material/Fade";
 
-function MenuList() {
+function MenuList({ onClick }) {
   const navigate = useNavigate();
   const handelLogout = () => {
     sessionStorage.clear();
@@ -20,25 +21,42 @@ function MenuList() {
     <>
       {sideBarList.map((list) => {
         return (
-          <NavLink
-            to={list.href}
-            className={({ isActive, isPending }) =>
-              isPending ? "pending" : isActive ? "active" : ""
-            }
+          <Tooltip
+            title={list.title}
+            arrow
+            placement="right"
+            TransitionComponent={Fade}
+            TransitionProps={{ timeout: 600 }}
           >
-            <ListItemButton className="onhover1">
-              <ListItemIcon>{list.icon}</ListItemIcon>
-              <ListItemText primary={list.title} />
-            </ListItemButton>
-          </NavLink>
+            <NavLink
+              to={list.href}
+              className={({ isActive, isPending }) =>
+                isPending ? "pending" : isActive ? "active" : ""
+              }
+              onClick={() => onClick(false)}
+            >
+              <ListItemButton className="onhover1">
+                <ListItemIcon>{list.icon}</ListItemIcon>
+                <ListItemText primary={list.title} />
+              </ListItemButton>
+            </NavLink>
+          </Tooltip>
         );
       })}
-      <ListItemButton onClick={() => handelLogout()} className="onhover1">
-        <ListItemIcon>
-          <LogoutIcon />
-        </ListItemIcon>
-        <ListItemText primary="Log out" style={{ color: "#0000EE" }} />
-      </ListItemButton>
+      <Tooltip
+        title="Log out"
+        arrow
+        placement="right"
+        TransitionComponent={Fade}
+        TransitionProps={{ timeout: 600 }}
+      >
+        <ListItemButton onClick={() => handelLogout()} className="onhover1">
+          <ListItemIcon>
+            <LogoutIcon />
+          </ListItemIcon>
+          <ListItemText primary="Log out" style={{ color: "#0000EE" }} />
+        </ListItemButton>
+      </Tooltip>
       <Divider sx={{ my: 1 }} />
     </>
   );

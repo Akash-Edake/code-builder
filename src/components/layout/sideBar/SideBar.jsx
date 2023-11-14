@@ -23,8 +23,8 @@ export default function SideBar() {
 
   const { userTheme } = useSelector((state) => state.counter);
 
-  const toggleDrawer = () => {
-    setOpen(!open);
+  const toggleDrawer = (isOpen) => {
+    setOpen(isOpen);
   };
 
   const darkTheme = createTheme({
@@ -47,7 +47,7 @@ export default function SideBar() {
               edge="start"
               //   color="inherit"
               aria-label="open drawer"
-              onClick={toggleDrawer}
+              onClick={() => toggleDrawer(true)}
               sx={{
                 marginRight: "36px",
                 ...(open && { display: "none" }),
@@ -79,14 +79,14 @@ export default function SideBar() {
               px: [1],
             }}
           >
-            <IconButton onClick={toggleDrawer}>
+            <IconButton onClick={() => toggleDrawer(false)}>
               <ChevronLeftIcon />
             </IconButton>
           </Toolbar>
           <Divider />
 
           <List component="nav" style={{ position: "none" }}>
-            <MenuList />
+            <MenuList onClick={toggleDrawer} />
           </List>
         </Drawer>
         <Box
