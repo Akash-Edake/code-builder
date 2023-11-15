@@ -1,6 +1,4 @@
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { CodeStorage } from "../redux/action/counterSlice";
 
 const BASE_URL = "https://code-builder-api.vercel.app";
 //  const BASE_URL = "https://code-builder-api.onrender.com";

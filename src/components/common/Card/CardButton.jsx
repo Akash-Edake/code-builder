@@ -15,6 +15,7 @@ import { useState } from "react";
 import VideoCard from "../VideoCard/VideoCard";
 import DocCard from "../docCard/DocCard";
 
+
 function CardButton({ titles, componentType }) {
   const [show, setShow] = useState(titles[0]);
 
@@ -23,7 +24,9 @@ function CardButton({ titles, componentType }) {
     videos: <OndemandVideoIcon sx={{ mr: 1 }} />,
     documents: <DescriptionIcon sx={{ mr: 1 }} />,
   };
+  
 
+  
   const tab = {
     code: (
       <>
@@ -49,6 +52,8 @@ function CardButton({ titles, componentType }) {
               sx={{
                 boxShadow: 2,
                 borderRadius: 2,
+                // backgroundColor:"#00ED64",
+                // border:"1px solid "
               }}
               className="onhover"
             >

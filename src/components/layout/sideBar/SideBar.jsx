@@ -17,11 +17,13 @@ import Routing from "../../../routing/Routing";
 import Profile from "../../common/avatar/Profile";
 import SwitchMode from "../../common/buttons/theme/SwitchMode";
 import MenuList from "./MenuList";
+import { Fab } from "@mui/material";
+import RightSideDrawer from "../../common/drawer/RightSideDrawer";
 
 export default function SideBar() {
   const [open, setOpen] = React.useState(false);
 
-  const { userTheme } = useSelector((state) => state.counter);
+  const { userTheme, muiTheme } = useSelector((state) => state.counter);
 
   const toggleDrawer = (isOpen) => {
     setOpen(isOpen);
@@ -32,9 +34,43 @@ export default function SideBar() {
       mode: userTheme,
     },
   });
+  const muiLight = createTheme({
+    palette: {
+      mode: userTheme,
+      primary: {
+        main: muiTheme.primary.main[userTheme],
+      },
+      secondary: {
+        main: muiTheme.secondary.main[userTheme],
+      },
+      error: {
+        main: "#d32f2f",
+      },
+      background: muiTheme.background[userTheme],
+      text: muiTheme.text[userTheme],
+      warning: {
+        main: "rgba(237,108,2,0.97)",
+      },
+      info: {
+        main: "rgba(2,136,209,0.98)",
+      },
+      success: {
+        main: "rgba(46,125,50,0.97)",
+      },
+      divider: muiTheme.divider[userTheme],
+    },
+    typography: {
+      h1: {
+        fontSize: "4.8rem",
+      },
+      h2: {
+        fontSize: "3.9rem",
+      },
+    },
+  });
 
   return (
-    <ThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={muiLight}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <AppBar position="absolute" color="inherit" open={open}>
@@ -102,6 +138,7 @@ export default function SideBar() {
           <Grid sx={{ m: 2 }}>
             <Routing />
           </Grid>
+          <RightSideDrawer />
         </Box>
       </Box>
     </ThemeProvider>
