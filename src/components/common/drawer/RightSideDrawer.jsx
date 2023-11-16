@@ -31,7 +31,7 @@ function RightSideDrawer() {
         size="small"
         onClick={toggleDrawer("right", true)}
       >
-        <SettingsIcon fontSize="small" />
+        <SettingsIcon className="rotation" fontSize="small" />
       </Fab>
 
       <Drawer

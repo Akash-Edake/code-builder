@@ -41,6 +41,20 @@ a {
   /* background-color: rgb(215, 17, 17); */
 }
 
+.rotation{
+  width: 300px;
+  animation: rotation 6s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media (max-width:600px) {
   .hide {
     display: none !important;
