@@ -12,28 +12,33 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { ThemeProvider, createTheme, styled } from "@mui/material/styles";
 import * as React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Routing from "../../../routing/Routing";
 import Profile from "../../common/avatar/Profile";
 import SwitchMode from "../../common/buttons/theme/SwitchMode";
 import MenuList from "./MenuList";
 import { Fab } from "@mui/material";
 import RightSideDrawer from "../../common/drawer/RightSideDrawer";
+import { MuiTheme } from "../../../redux/action/counterSlice";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function SideBar() {
-  const [open, setOpen] = React.useState(false);
+  const loginUser = JSON.parse(sessionStorage.getItem("userData"));
 
   const { userTheme, muiTheme } = useSelector((state) => state.counter);
+  const dispatch = useDispatch();
+
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    dispatch(MuiTheme(loginUser.muiTheme));
+  }, []);
 
   const toggleDrawer = (isOpen) => {
     setOpen(isOpen);
   };
 
-  const darkTheme = createTheme({
-    palette: {
-      mode: userTheme,
-    },
-  });
   const muiLight = createTheme({
     palette: {
       mode: userTheme,

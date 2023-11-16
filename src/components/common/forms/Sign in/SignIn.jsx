@@ -3,7 +3,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInApi } from "../../../../api/api";
 import { useDispatch } from "react-redux";
-import { UserData } from "../../../../redux/action/counterSlice";
+import { MuiTheme, UserData } from "../../../../redux/action/counterSlice";
 
 function SignIn() {
   const dispatch = useDispatch();
@@ -24,6 +24,7 @@ function SignIn() {
     try {
       const user = await signInApi(userEmail, userPassword);
       dispatch(UserData(user));
+      dispatch(MuiTheme(user.userLogin.muiTheme));
       sessionStorage.setItem("userData", JSON.stringify(user.userLogin));
       navigate("/");
     } catch (error) {

@@ -3,6 +3,8 @@ import axios from "axios";
 const BASE_URL = "https://code-builder-api.vercel.app";
 //  const BASE_URL = "https://code-builder-api.onrender.com";
 
+const loginUser = JSON.parse(sessionStorage.getItem("userData"));
+
 const profilePicApi = async (id, picBase64) => {
   try {
     const getProfilePicApi = await axios({
@@ -30,6 +32,26 @@ const ThemeApi = async (id, value) => {
       data: {
         id: id,
         theme: value,
+      },
+    });
+    return getThemeApi.data.theme;
+  } catch (error) {
+    console.log("Error in setting up the user's theme");
+    throw error;
+  }
+};
+
+const MuiThemeApi = async (value) => {
+  try {
+    loginUser.muiTheme = value;
+    sessionStorage.setItem("userData", JSON.stringify(loginUser));
+    const getThemeApi = await axios({
+      method: "post",
+      url: `${BASE_URL}/user/muitheme`,
+      headers: {},
+      data: {
+        id: loginUser._id,
+        muiTheme: value,
       },
     });
     return getThemeApi.data.theme;
@@ -105,8 +127,7 @@ const codeApi = async (id, theme, codeTheme) => {
       method: "get",
       url: `${BASE_URL}/code`,
       headers: {},
-      data: {
-      },
+      data: {},
     });
     return user.data;
   } catch (error) {
@@ -115,4 +136,12 @@ const codeApi = async (id, theme, codeTheme) => {
   }
 };
 
-export { profilePicApi, ThemeApi, signInApi, signUpApi, snippetsThemeApi,codeApi };
+export {
+  profilePicApi,
+  ThemeApi,
+  signInApi,
+  signUpApi,
+  snippetsThemeApi,
+  codeApi,
+  MuiThemeApi,
+};

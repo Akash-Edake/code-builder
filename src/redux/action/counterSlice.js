@@ -75,13 +75,13 @@ const initialState = {
         primary: "rgba(0,0,0,0.89)",
         secondary: "rgba(0, 0, 0, 0.6)",
         disabled: "rgba(0,0,0,0.39)",
-        hint:"#22194D"
+        hint: "#22194D",
       },
       dark: {
         primary: "#fff",
         secondary: "#fff",
         disabled: "#fff",
-        hint:"#22194D"
+        hint: "#22194D",
       },
     },
     divider: {
@@ -104,10 +104,14 @@ export const counterSlice = createSlice({
     CodeStorage: (state, action) => {
       state.codeStorage = action.payload;
     },
+    MuiTheme: (state, action) => {
+      state.muiTheme = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { UserTheme, UserData, CodeStorage } = counterSlice.actions;
+export const { UserTheme, UserData, CodeStorage, MuiTheme } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;
