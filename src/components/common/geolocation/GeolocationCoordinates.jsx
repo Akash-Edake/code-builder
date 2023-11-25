@@ -26,15 +26,15 @@ function GeolocationCoordinates() {
       return;
     }
     initialRef.current = false;
-    
+
     navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
   }, []);
   return (
-    <Badge sx={{ mr: 3 }} badgeContent={location.temperature + "°c"}>
+    <Badge sx={{ mr: 3 }} badgeContent={location.temperature + "°c"} color="secondary">
       <Avatar
         alt="Travis Howard"
         src={location.weather_icons[0]}
-        sx={{ width: 24, height: 24 }}
+        sx={{ width: 30, height: 30 }}
       />
     </Badge>
   );
