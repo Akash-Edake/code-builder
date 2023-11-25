@@ -22,6 +22,7 @@ import RightSideDrawer from "../../common/drawer/RightSideDrawer";
 import { MuiTheme } from "../../../redux/action/counterSlice";
 import { useEffect } from "react";
 import { useState } from "react";
+import GeolocationCoordinates from "../../common/geolocation/GeolocationCoordinates";
 
 export default function SideBar() {
   const loginUser = JSON.parse(sessionStorage.getItem("userData"));
@@ -107,6 +108,7 @@ export default function SideBar() {
             </Typography>
             <SwitchMode />
 
+            <GeolocationCoordinates />
             {/* ------------- profile avatar -------------- */}
             <Profile />
           </Toolbar>
