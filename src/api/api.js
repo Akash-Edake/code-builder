@@ -144,7 +144,6 @@ const geolocationApi = async (latitude, longitude) => {
       headers: {},
       data: { email: loginUser.email, latitude, longitude },
     });
-    console.log(weather);
     return weather.data;
   } catch (error) {
     console.log("Error in login");
