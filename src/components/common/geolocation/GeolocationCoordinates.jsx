@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { geolocationApi } from "../../../api/api";
 
 function GeolocationCoordinates() {
+  const loginUser = JSON.parse(sessionStorage.getItem("userData"));
   const [location, setLocation] = useState({
     weather_icons: "",
     temperature: "",
@@ -12,7 +13,7 @@ function GeolocationCoordinates() {
   const successCallback = async (position) => {
 
     const { latitude, longitude } = position.coords;
-    const weather = await geolocationApi(latitude, longitude);
+    const weather = await geolocationApi(loginUser.email,latitude, longitude);
 
     const { weather_icons, temperature } = weather.current;
     setLocation({ weather_icons, temperature });

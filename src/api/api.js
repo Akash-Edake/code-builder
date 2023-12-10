@@ -136,13 +136,13 @@ const codeApi = async (id, theme, codeTheme) => {
   }
 };
 
-const geolocationApi = async (latitude, longitude) => {
+const geolocationApi = async (email,latitude, longitude) => {
   try {
     const weather = await axios({
       method: "post",
       url: `${BASE_URL}/weather`,
       headers: {},
-      data: { email: loginUser.email, latitude, longitude },
+      data: { email, latitude, longitude },
     });
     return weather.data;
   } catch (error) {
