@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const BASE_URL = "https://code-builder-api.vercel.app";
-// const BASE_URL = "https://code-builder-api.onrender.com";
+// const BASE_URL = "https://code-builder-api.vercel.app";
+const BASE_URL = "https://code-builder-api.onrender.com";
 
 const loginUser = JSON.parse(sessionStorage.getItem("userData"));
 
